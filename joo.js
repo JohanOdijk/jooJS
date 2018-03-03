@@ -45,11 +45,11 @@ jooJS = {
     text = this.defaultParam(text,null);
     div = this.defaultParam(div,false);
     if (div) {
-      el = this.makeEl("div",text);
-      el.classList.add("button");
+      el = this.makeEl("div",text); 
     } else {
       el = this.makeEl("button",text);
     }
+    el.classList.add("button");
     el.addEventListener("click",func);
     return el;
   }
