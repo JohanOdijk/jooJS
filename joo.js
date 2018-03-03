@@ -40,24 +40,17 @@ jooJS = {
         el.appendChild(document.createTextNode(text));
     }
     return el;
+  },
+  makeButton: function(text,func,div) { //makes a button, either as a div or as a button and has a click addEventListener of func.
+    text = this.defaultParam(text,null);
+    div = this.defaultParam(div,false);
+    if (div) {
+      el = this.makeEl("div",text);
+      el.classList.add("button");
+    } else {
+      el = this.makeEl("button",text);
+    }
+    el.addEventListener("click",func);
+    return el;
   }
 };
-
-/*
-TEMP:
-*/
-//testing/messing around with libary:
-
-jooJS.getURL('https://jsonplaceholder.typicode.com/posts',function (json){
-  json = jooJS.defaultParam(json,'[{"title":"lol!"},{"title":"xD"}]');
-
-  json = JSON.parse(json);
-  console.log(json);
-  json = jooJS.shuffleArray(json);
-
-  titels = "";
-  for (var i = 0; i < json.length; i++) {
-    titels += json[i].title+" ";
-  }
-  document.body.appendChild(jooJS.makeEl('div',titels));
-});
