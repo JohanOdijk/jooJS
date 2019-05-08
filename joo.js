@@ -73,5 +73,11 @@ jooJS = {
     el.classList.add("button");
     el.addEventListener("click",func);
     return el;
+  },
+  emptyEl: function(el) { //removes an element's content. SRC: https://stackoverflow.com/a/3955238
+    while (el.firstChild) {
+      el.removeChild(el.firstChild);
+    }
+    return true
   }
 };
