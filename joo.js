@@ -54,11 +54,17 @@ jooJS = {
       return false;
     }
   },
-  makeEl: function(type,text) { //returns an element, if wanted with text inside it.
+  makeEl: function(type,text,classes) { //returns an element, if wanted with text inside it.
     text = this.defaultParam(text,null);
+    classes = this.defaultParam(classes,null);
     el = document.createElement(type);
     if (text !== null) {
         el.appendChild(document.createTextNode(text));
+    }
+    if (classes !== null) {
+      classes.forEach(function(className){
+        el.classList.add(className);
+      });
     }
     return el;
   },
