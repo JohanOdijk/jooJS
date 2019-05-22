@@ -5,15 +5,17 @@ jooJS = {
     param = typeof param !== 'undefined' ? param : def;
     return param;
   },
-  getURL: function(url,callback) {//uses a get request to get an url
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-        callback(this.responseText);
-      }
-    };
-    xhttp.open("GET", url, true);
-    xhttp.send();
+  getURL: function(url,callback,cache) {//uses a get request to get an url
+    cache = this.defaultParam(cache,true);
+
+    var request = new XMLHttpRequest();
+    request.addEventListener("load",function () {callback(this.responseText)});
+    if (cache) { //use normal url, cache is included (default)
+      request.open("GET",url);
+    } else { //unique url (using date)
+      request.open("GET", url + ((/\?/).test(url) ? "&" : "?") + (new Date()).getTime());
+    }
+    request.send();
   },
   postURL: function(path, params) { //gotten from https://stackoverflow.com/a/133997., slightly modified to make it only accept post.
     // The rest of this code assumes you are not using a library.
